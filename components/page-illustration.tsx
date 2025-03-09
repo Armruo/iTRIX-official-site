@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Illustration from "@/public/images/page-illustration-2.svg";
+import Illustration from "@/public/images/page-illustration-3.svg";
 import BlurredShapeGray from "@/public/images/blurred-shape-gray.svg";
 import BlurredShape from "@/public/images/blurred-shape.svg";
 
