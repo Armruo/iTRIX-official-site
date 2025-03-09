@@ -6,7 +6,6 @@ import {
 } from '@ant-design/web3';
 import { Button, Popconfirm } from 'antd';
 import React from 'react';
-import { useIntl } from 'umi';
 
 interface Props {
   style?: React.CSSProperties;
@@ -21,14 +20,11 @@ const MyConnectButton: React.FC<ConnectorTriggerProps & Props> = ({
   loading,
   account,
 }) => {
-  const { formatMessage } = useIntl();
   if (account && !loading) {
     return (
       <div style={{ position: 'relative' }}>
         <Popconfirm
-          title={formatMessage({
-            id: 'disconnect_confirm',
-          })}
+          title="Are you sure you want to disconnect?"
           onConfirm={async () => {
             onDisconnectClick?.();
           }}
@@ -49,12 +45,8 @@ const MyConnectButton: React.FC<ConnectorTriggerProps & Props> = ({
         onClick={onConnectClick}
       >
         {loading
-          ? formatMessage({
-              id: 'connecting',
-            })
-          : formatMessage({
-              id: 'connect_wallet',
-            })}
+          ? "Connecting..."
+          : "Connect Wallet"}
       </IndexBtn>
     </div>
   );

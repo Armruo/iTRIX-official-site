@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 import Header from "@/components/ui/header";
+import DebugProvider from "@/components/debug-provider";
+import CommonWeb3Layout from "@/components/connect-provider";
 
 // Inter字体配置：Google 的 Inter 字体，设置为变量字体，使用 swap 显示策略
 const inter = Inter({
@@ -65,10 +67,14 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${nacelle.variable} bg-gray-900 font-inter text-base text-gray-200 antialiased`}
       >
-        <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
-          <Header />
-          {children}
-        </div>
+        <DebugProvider>
+          <CommonWeb3Layout>
+            <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
+              <Header />
+              {children}
+            </div>
+          </CommonWeb3Layout>
+        </DebugProvider>
       </body>
     </html>
   );
