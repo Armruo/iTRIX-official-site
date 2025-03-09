@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
+import { useTheme } from "@/context/theme-context";
 
 type DropdownProps = {
   children: React.ReactNode;
@@ -12,7 +13,31 @@ type DropdownProps = {
 export default function Dropdown({ children, title, titleClassName = "text-gray-200" }: DropdownProps) {
   const dropdownRef = useRef<HTMLUListElement | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [localTheme, setLocalTheme] = useState<"light" | "dark">("light");
+  
+  let theme: "light" | "dark" = "light";
+  
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+  } catch (error) {
+    theme = localTheme;
+  }
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme') as "light" | "dark" | null;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+      setLocalTheme(initialTheme);
+    }
+  }, []);
 
+  const dropdownBg = theme === 'dark' 
+    ? 'bg-gray-900/90 before:[background:linear-gradient(to_bottom,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box]'
+    : 'bg-white/90 before:[background:linear-gradient(to_bottom,theme(colors.gray.200),theme(colors.gray.300),theme(colors.gray.200))_border-box]';
+  
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setDropdownOpen(!dropdownOpen);
@@ -56,7 +81,7 @@ export default function Dropdown({ children, title, titleClassName = "text-gray-
           ref={dropdownRef}
           show={dropdownOpen}
           as="ul"
-          className="relative mt-5 w-36 rounded-xl bg-gray-900/90 p-2 backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] dark:bg-gray-900/90 dark:before:[background:linear-gradient(to_bottom,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] light:bg-white/90 light:before:[background:linear-gradient(to_bottom,theme(colors.gray.200),theme(colors.gray.300),theme(colors.gray.200))_border-box]"
+          className={`relative mt-5 w-36 rounded-xl ${dropdownBg} p-2 backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]`}
           enter="transition ease-out transform"
           enterFrom="opacity-0 -translate-y-2"
           enterTo="opacity-100 translate-y-0"
