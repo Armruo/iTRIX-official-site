@@ -3,9 +3,46 @@
 import { useState, useRef, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import Link from "next/link";
+import { useTheme } from "@/context/theme-context";
 
 export default function MobileMenu() {
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
+  // 添加本地状态作为备用
+  const [localTheme, setLocalTheme] = useState<"light" | "dark">("light");
+  
+  // 默认使用浅色主题
+  let theme: "light" | "dark" = "light";
+  
+  // 尝试使用全局主题上下文
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+  } catch (error) {
+    // 如果 ThemeProvider 不可用，使用本地状态
+    theme = localTheme;
+  }
+  
+  // 初始化本地主题
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // 从本地存储或系统偏好获取主题
+      const savedTheme = localStorage.getItem('theme') as "light" | "dark" | null;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+      setLocalTheme(initialTheme);
+    }
+  }, []);
+
+  // 根据主题设置不同的背景和边框颜色
+  const mobileBg = theme === 'dark' 
+    ? 'bg-gray-900/90 before:[background:linear-gradient(to_bottom,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box]'
+    : 'bg-white/90 before:[background:linear-gradient(to_bottom,theme(colors.gray.200),theme(colors.gray.300),theme(colors.gray.200))_border-box]';
+  
+  // 根据主题设置不同的文本颜色
+  const textColor = theme === 'dark' ? 'text-gray-200' : 'text-gray-700';
+  const linkColor = theme === 'dark' ? 'text-white hover:text-indigo-500' : 'text-gray-800 hover:text-indigo-600';
+  const buttonColor = theme === 'dark' ? 'text-gray-200' : 'text-gray-700';
 
   const trigger = useRef<HTMLButtonElement>(null);
   const mobileNav = useRef<HTMLDivElement>(null);
@@ -41,7 +78,7 @@ export default function MobileMenu() {
       {/* Hamburger button */}
       <button
         ref={trigger}
-        className={`group inline-flex h-8 w-8 items-center justify-center text-center text-gray-200 transition ${mobileNavOpen && "active"}`}
+        className={`group inline-flex h-8 w-8 items-center justify-center text-center ${buttonColor} transition ${mobileNavOpen && "active"}`}
         aria-controls="mobile-nav"
         aria-expanded={mobileNavOpen}
         onClick={() => setMobileNavOpen(!mobileNavOpen)}
@@ -84,7 +121,7 @@ export default function MobileMenu() {
           show={mobileNavOpen}
           as="nav"
           id="mobile-nav"
-          className="absolute left-0 top-full z-20 mt-2 w-full rounded-xl bg-gray-900/90 backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]"
+          className={`absolute left-0 top-full z-20 mt-2 w-full rounded-xl ${mobileBg} backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]`}
           enter="transition ease-out duration-200 transform"
           enterFrom="opacity-0 -translate-y-2"
           enterTo="opacity-100 translate-y-0"
@@ -96,7 +133,7 @@ export default function MobileMenu() {
             <li>
               <Link
                 href="/pricing"
-                className="flex rounded-lg px-2 py-1.5 text-white hover:text-indigo-500"
+                className={`flex rounded-lg px-2 py-1.5 ${linkColor}`}
                 onClick={() => setMobileNavOpen(false)}
               >
                 Pricing
@@ -105,7 +142,7 @@ export default function MobileMenu() {
             <li>
               <Link
                 href="/about"
-                className="flex rounded-lg px-2 py-1.5 text-white hover:text-indigo-500"
+                className={`flex rounded-lg px-2 py-1.5 ${linkColor}`}
                 onClick={() => setMobileNavOpen(false)}
               >
                 About Us
@@ -114,7 +151,7 @@ export default function MobileMenu() {
             <li>
               <Link
                 href="/blog"
-                className="flex rounded-lg px-2 py-1.5 text-white hover:text-indigo-500"
+                className={`flex rounded-lg px-2 py-1.5 ${linkColor}`}
                 onClick={() => setMobileNavOpen(false)}
               >
                 Blog
@@ -123,16 +160,17 @@ export default function MobileMenu() {
             <li>
               <Link
                 href="/help/frequently-asked-questions"
-                className="flex rounded-lg px-2 py-1.5 text-white hover:text-indigo-500"
+                className={`flex rounded-lg px-2 py-1.5 ${linkColor}`}
                 onClick={() => setMobileNavOpen(false)}
               >
                 Help Centre
               </Link>
             </li>
+            <li className="py-2 text-gray-400">Resources</li>
             <li>
               <Link
                 href="/newsletter"
-                className="flex rounded-lg px-2 py-1.5 text-white hover:text-indigo-500"
+                className={`flex rounded-lg px-2 py-1.5 ${linkColor}`}
                 onClick={() => setMobileNavOpen(false)}
               >
                 Newsletter
@@ -141,16 +179,16 @@ export default function MobileMenu() {
             <li>
               <Link
                 href="/contact"
-                className="flex rounded-lg px-2 py-1.5 text-white hover:text-indigo-500"
+                className={`flex rounded-lg px-2 py-1.5 ${linkColor}`}
                 onClick={() => setMobileNavOpen(false)}
               >
-                Contact
+                Contact Us
               </Link>
             </li>
             <li>
               <Link
                 href="/404"
-                className="flex rounded-lg px-2 py-1.5 text-white hover:text-indigo-500"
+                className={`flex rounded-lg px-2 py-1.5 ${linkColor}`}
                 onClick={() => setMobileNavOpen(false)}
               >
                 404

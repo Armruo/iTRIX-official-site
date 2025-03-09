@@ -35,6 +35,8 @@ const IndexBtn: React.FC<IndexBtnProps> = ({
         justifyContent: 'center',
         fontWeight: 'bold',
         transition: 'all 0.3s ease',
+        whiteSpace: 'nowrap', // 防止文字换行
+        minWidth: size === 'small' ? '140px' : '160px', // 设置最小宽度
       }}
       onMouseOver={(e) => {
         e.currentTarget.style.opacity = '0.9';

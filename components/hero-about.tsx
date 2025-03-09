@@ -1,4 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { getThemeColor, getThemeGradient } from "@/utils/theme";
+import { useTheme } from "@/context/theme-context";
 
 import TeamImg01 from "@/public/images/team-mosaic-01.jpg";
 import TeamImg02 from "@/public/images/team-mosaic-02.jpg";
@@ -6,6 +11,36 @@ import TeamImg03 from "@/public/images/team-mosaic-03.jpg";
 import TeamImg04 from "@/public/images/team-mosaic-04.jpg";
 
 export default function HeroAbout() {
+  // 添加本地状态作为备用
+  const [localTheme, setLocalTheme] = useState<"light" | "dark">("light");
+  
+  // 默认使用浅色主题
+  let theme: "light" | "dark" = "light";
+  
+  // 尝试使用全局主题上下文
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+  } catch (error) {
+    // 如果 ThemeProvider 不可用，使用本地状态
+    theme = localTheme;
+  }
+  
+  // 初始化本地主题
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // 从本地存储或系统偏好获取主题
+      const savedTheme = localStorage.getItem('theme') as "light" | "dark" | null;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+      setLocalTheme(initialTheme);
+    }
+  }, []);
+
+  const textSecondary = getThemeColor(theme, 'text.secondary');
+  const gradientBg = getThemeGradient(theme);
+  
   return (
     <section>
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -13,11 +48,11 @@ export default function HeroAbout() {
         <div className="py-12 md:py-20">
           {/* Section header */}
           <div className="pb-12 text-center md:pb-20">
-            <h1 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold text-transparent md:text-5xl">
+            <h1 className={`animate-[gradient_6s_linear_infinite] ${gradientBg} bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold text-transparent md:text-5xl`}>
               The story behind the project
             </h1>
             <div className="mx-auto max-w-3xl">
-              <p className="text-xl text-indigo-200/65">
+              <p className={`text-xl ${textSecondary}/65`}>
                 Developers are trusted to create an engaging experience for
                 their companies, so we build tools to help them.
               </p>

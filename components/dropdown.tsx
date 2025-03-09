@@ -6,9 +6,10 @@ import { Transition } from "@headlessui/react";
 type DropdownProps = {
   children: React.ReactNode;
   title: string;
+  titleClassName?: string;
 };
 
-export default function Dropdown({ children, title }: DropdownProps) {
+export default function Dropdown({ children, title, titleClassName = "text-gray-200" }: DropdownProps) {
   const dropdownRef = useRef<HTMLUListElement | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
@@ -32,7 +33,7 @@ export default function Dropdown({ children, title }: DropdownProps) {
       onMouseEnter={() => setDropdownOpen(true)}
       onMouseLeave={() => setDropdownOpen(false)}
     >
-      <span className="flex cursor-pointer items-center text-gray-200 transition group-hover:text-indigo-500">
+      <span className={`flex cursor-pointer items-center transition group-hover:text-indigo-500 ${titleClassName}`}>
         {title}
       </span>
       <button
@@ -55,7 +56,7 @@ export default function Dropdown({ children, title }: DropdownProps) {
           ref={dropdownRef}
           show={dropdownOpen}
           as="ul"
-          className="relative mt-5 w-36 rounded-xl bg-gray-900/90 p-2 backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]"
+          className="relative mt-5 w-36 rounded-xl bg-gray-900/90 p-2 backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] dark:bg-gray-900/90 dark:before:[background:linear-gradient(to_bottom,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] light:bg-white/90 light:before:[background:linear-gradient(to_bottom,theme(colors.gray.200),theme(colors.gray.300),theme(colors.gray.200))_border-box]"
           enter="transition ease-out transform"
           enterFrom="opacity-0 -translate-y-2"
           enterTo="opacity-100 translate-y-0"

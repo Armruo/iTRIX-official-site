@@ -1,14 +1,50 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useTheme } from "@/context/theme-context";
+import { getThemeColor, getThemeGradient } from "@/utils/theme";
+
 export default function Timeline() {
+  // 添加本地状态作为备用
+  const [localTheme, setLocalTheme] = useState<"light" | "dark">("light");
+  
+  // 默认使用浅色主题
+  let theme: "light" | "dark" = "light";
+  
+  // 尝试使用全局主题上下文
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+  } catch (error) {
+    // 如果 ThemeProvider 不可用，使用本地状态
+    theme = localTheme;
+  }
+  
+  // 初始化本地主题
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // 从本地存储或系统偏好获取主题
+      const savedTheme = localStorage.getItem('theme') as "light" | "dark" | null;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+      setLocalTheme(initialTheme);
+    }
+  }, []);
+
+  const textSecondary = getThemeColor(theme, 'text.secondary');
+  const gradientBg = getThemeGradient(theme);
+
   return (
     <section>
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="pb-12 md:pb-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
+            <h2 className={`animate-[gradient_6s_linear_infinite] ${gradientBg} bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl`}>
               Bringing the world's ideas to life
             </h2>
-            <p className="text-lg text-indigo-200/65">
+            <p className={`text-lg ${textSecondary}/65`}>
               We were frustrated because content tools hadn't innovated, so we
               sat down and drew up what we thought a new product could look
               like.
@@ -45,7 +81,7 @@ export default function Timeline() {
                     ITRIX was founded in Milan, Italy
                   </h4>
                 </div>
-                <p className="text-[1rem] text-indigo-200/65">
+                <p className={`text-[1rem] ${textSecondary}/65`}>
                   Pretium lectus quam id leo. Urna et pharetra pharetra massa
                   massa. Adipiscing enim eu neque aliquam vestibulum morbi
                   blandit cursus risus.
@@ -79,7 +115,7 @@ export default function Timeline() {
                     Launched the first ITRIX Advanced plan
                   </h4>
                 </div>
-                <p className="text-[1rem] text-indigo-200/65">
+                <p className={`text-[1rem] ${textSecondary}/65`}>
                   Pretium lectus quam id leo. Urna et pharetra pharetra massa
                   massa. Adipiscing enim eu neque aliquam vestibulum morbi
                   blandit cursus risus.
@@ -113,7 +149,7 @@ export default function Timeline() {
                     Transitioned to a SaaS business model
                   </h4>
                 </div>
-                <p className="text-[1rem] text-indigo-200/65">
+                <p className={`text-[1rem] ${textSecondary}/65`}>
                   Pretium lectus quam id leo. Urna et pharetra pharetra massa
                   massa. Adipiscing enim eu neque aliquam vestibulum morbi
                   blandit cursus risus.
@@ -143,7 +179,7 @@ export default function Timeline() {
                     1 million happy customers
                   </h4>
                 </div>
-                <p className="text-[1rem] text-indigo-200/65">
+                <p className={`text-[1rem] ${textSecondary}/65`}>
                   Pretium lectus quam id leo. Urna et pharetra pharetra massa
                   massa. Adipiscing enim eu neque aliquam vestibulum morbi
                   blandit cursus risus.

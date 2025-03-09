@@ -18,7 +18,7 @@ export default function About() {
       <PageIllustration multiple />
       <Hero />
       <Timeline />
-      <Team />
+      {/* <Team /> */}
       <Benefits />
       <Career />
       <Clients />

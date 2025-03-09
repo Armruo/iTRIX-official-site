@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import Header from "@/components/ui/header";
 import DebugProvider from "@/components/debug-provider";
 import CommonWeb3Layout from "@/components/connect-provider";
+import { ThemeProvider } from "@/context/theme-context";
 
 // Inter字体配置：Google 的 Inter 字体，设置为变量字体，使用 swap 显示策略
 const inter = Inter({
@@ -52,8 +53,8 @@ export const metadata = {
  * 根布局组件
  * 1.定义整个应用的页面结构、响应式布局、集成全局Header组件、使用children属性渲染子页面内容
  * 2.设置语言：英文
- * 3.管理全局字体和样式；字体平滑处理：antialiased
- * 4.深色主题（bg-gray-950）
+ * 3.管理全局字体和样式；使用自定义颜色主题 text-itrix-text-primary；字体平滑处理：antialiased
+ * 4.深色主题（bg-gray-950）；浅色主题（bg-white）
  * 5.溢出处理 (overflow-hidden 和 overflow-clip)
  * 
  */
@@ -65,16 +66,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${nacelle.variable} bg-gray-900 font-inter text-base text-gray-200 antialiased`}
+        className={`${inter.variable} ${nacelle.variable} font-inter text-base antialiased`}
+        suppressHydrationWarning
       >
-        <DebugProvider>
-          <CommonWeb3Layout>
-            <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
-              <Header />
-              {children}
-            </div>
-          </CommonWeb3Layout>
-        </DebugProvider>
+        <ThemeProvider>
+          <DebugProvider>
+            <CommonWeb3Layout>
+              <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
+                <Header />
+                {children}
+              </div>
+            </CommonWeb3Layout>
+          </DebugProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,8 +1,8 @@
 "use client"; // 标记为客户端组件
 
-import { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import type { StaticImageData } from "next/image";
-import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import SecondaryIllustration from "@/public/images/secondary-illustration.svg";
 
@@ -32,6 +32,24 @@ export default function ModalVideo({
   // 状态管理：useState：模态框的开关；useRef：引用视频元素
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // 处理 Dialog 挂载和卸载
+  useEffect(() => {
+    // 当模态框打开时，防止页面滚动
+    if (modalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      // 当模态框关闭时，暂停视频
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [modalOpen]);
 
   return (
     <div className="relative">
@@ -111,23 +129,20 @@ export default function ModalVideo({
       {/* End: Video thumbnail */}
 
       {/* B.模态框部分 */}
-      <Dialog
-        initialFocus={videoRef}
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-      >
-        {/* 背景遮罩 */}
-        <DialogBackdrop
-          transition
-          className="fixed inset-0 z-[99999] bg-black/70 transition-opacity duration-300 ease-out data-[closed]:opacity-0"
-        />
-        <div className="fixed inset-0 z-[99999] flex px-4 py-6 sm:px-6">
-          <div className="mx-auto flex h-full max-w-6xl items-center">
-            {/* 视频播放器容器 */}
-            <DialogPanel
-              transition
-              className="aspect-video max-h-full w-full overflow-hidden rounded-2xl bg-black shadow-2xl duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
-            >
+      {modalOpen && (
+        <Dialog
+          static
+          open={modalOpen}
+          onClose={() => {
+            setModalOpen(false);
+          }}
+          className="relative z-[99999]"
+        >
+          {/* 背景遮罩 */}
+          <div className="fixed inset-0 bg-black/70" aria-hidden="true" />
+          
+          <div className="fixed inset-0 flex items-center justify-center p-4">
+            <Dialog.Panel className="mx-auto aspect-video max-h-full w-full max-w-6xl overflow-hidden rounded-2xl bg-black shadow-2xl">
               {/* 视频元素 */}
               <video
                 ref={videoRef}
@@ -135,14 +150,15 @@ export default function ModalVideo({
                 height={videoHeight}
                 loop
                 controls
+                autoPlay
               >
                 <source src={video} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-            </DialogPanel>
+            </Dialog.Panel>
           </div>
-        </div>
-      </Dialog>
+        </Dialog>
+      )}
     </div>
   );
 }
