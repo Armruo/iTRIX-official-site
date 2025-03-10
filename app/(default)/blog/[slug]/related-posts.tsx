@@ -13,7 +13,7 @@ export default function RelatedPosts() {
         className="mx-auto mt-12 max-w-3xl border-t pt-12 [border-image:linear-gradient(to_right,transparent,theme(colors.slate.400/.25),transparent)1] md:pt-20"
         aria-hidden="true"
       />
-      <h3 className="mb-8 text-center font-nacelle text-xl font-semibold text-gray-200 md:text-left">
+      <h3 className="mb-8 text-center font-cabinet-grotesk text-xl font-semibold text-gray-200 md:text-left">
         Read next
       </h3>
       <div className="mx-auto grid max-w-sm items-start gap-8 sm:max-w-none sm:grid-cols-2 lg:grid-cols-3">
@@ -47,7 +47,7 @@ export default function RelatedPosts() {
                 </li>
               </ul>
             </div>
-            <h3 className="mb-2 font-nacelle text-lg font-semibold">
+            <h3 className="mb-2 font-cabinet-grotesk text-lg font-semibold">
               <Link
                 className="text-gray-200 transition hover:text-white"
                 href="#0"
@@ -106,7 +106,7 @@ export default function RelatedPosts() {
                 </li>
               </ul>
             </div>
-            <h3 className="mb-2 font-nacelle text-lg font-semibold">
+            <h3 className="mb-2 font-cabinet-grotesk text-lg font-semibold">
               <Link
                 className="text-gray-200 transition hover:text-white"
                 href="#0"
@@ -165,7 +165,7 @@ export default function RelatedPosts() {
                 </li>
               </ul>
             </div>
-            <h3 className="mb-2 font-nacelle text-lg font-semibold">
+            <h3 className="mb-2 font-cabinet-grotesk text-lg font-semibold">
               <Link
                 className="text-gray-200 transition hover:text-white"
                 href="#0"

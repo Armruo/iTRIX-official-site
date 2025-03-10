@@ -52,11 +52,11 @@ export default function HeroHome() {
               animate-[gradient_6s_linear_infinite]
               ${gradientBg}
               bg-clip-text pb-5 
-              font-nacelle text-5xl 
+              font-cabinet-grotesk text-5xl 
               font-semibold text-transparent md:text-6xl`}
               data-aos="fade-up"
             >
-              AI-driven tools for product teams
+              AI-driven platform for creators and fans
             </h1>
 
             <div className="mx-auto max-w-3xl">
@@ -65,7 +65,7 @@ export default function HeroHome() {
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
-                ITRIX is a platform built for creators and fans. Use ITRIX to connect with fans, and to monetise your content safely, securely, and on your own terms. 
+                ITRIX is a platform built for creators and fans, driven by AI and blockchain technology. Use ITRIX to connect with fans, and to monetise your content safely, securely, and on your own terms. 
               </p>
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>

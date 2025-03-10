@@ -40,7 +40,7 @@ export default function PostItem({ ...props }) {
             </li>
           </ul>
         </div>
-        <h3 className="mb-2 font-nacelle text-lg font-semibold">
+        <h3 className="mb-2 font-cabinet-grotesk text-lg font-semibold">
           <Link
             className="text-gray-200 transition hover:text-white"
             href={`/blog/${props.slug}`}

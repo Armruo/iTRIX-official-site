@@ -51,7 +51,7 @@ export default function SplitCarousel() {
                 </div>
                 <div className="relative mb-6 border-l [border-image:linear-gradient(to_bottom,transparent,theme(colors.slate.400/.25),transparent)1] after:absolute after:left-0 after:top-0 after:h-4 after:w-px after:origin-bottom after:-translate-y-full after:animate-shine after:bg-[linear-gradient(180deg,_transparent,_theme(colors.indigo.500/.5)_25%,_theme(colors.indigo.500)_50%,_theme(colors.indigo.500/.5)_75%,_transparent)] after:opacity-0">
                   <div className="mb-4">
-                    <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
+                    <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-cabinet-grotesk text-3xl font-semibold text-transparent md:text-4xl">
                       Improve efficiency & global coverage
                     </h2>
                     <p className="text-indigo-200/65">
@@ -91,7 +91,7 @@ export default function SplitCarousel() {
                   </TabList>
                 </div>
                 <div>
-                  <p className="mb-4 font-nacelle text-gray-200">
+                  <p className="mb-4 font-cabinet-grotesk text-gray-200">
                     “I was blown away by how easy it was to create my content
                     using this tool! Within a few hours, I had a
                     professional-looking flow up and running.”

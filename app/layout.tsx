@@ -15,7 +15,7 @@ const inter = Inter({
   display: "swap",
 });
 
-// Nacelle 本地字体配置：常规字重、斜体、半粗体、半粗体斜体
+// 本地字体配置
 const nacelle = localFont({
   src: [
     {
@@ -39,10 +39,43 @@ const nacelle = localFont({
       style: "italic",
     },
   ],
-  variable: "--font-nacelle",
+  variable: "--font-cabinet-grotesk",
   display: "swap",
 });
 
+const hkgrotesk = localFont({
+  src: [
+    {
+      path: '../public/fonts/HKGrotesk-Medium.woff2',
+      weight: '500',
+    },
+    {
+      path: '../public/fonts/HKGrotesk-ExtraBold.woff2',
+      weight: '800',
+    },        
+  ],
+  variable: '--font-hkgrotesk',
+  display: 'swap',  
+})
+
+const cabinet = localFont({
+  src: [
+    {
+      path: '../public/fonts/CabinetGrotesk-Medium.woff2',
+      weight: '500',
+    },
+    {
+      path: '../public/fonts/CabinetGrotesk-Bold.woff2',
+      weight: '700',
+    },
+    {
+      path: '../public/fonts/CabinetGrotesk-Extrabold.woff2',
+      weight: '800',
+    },
+  ],
+  variable: '--font-cabinet-grotesk',
+  display: 'swap',
+})
 
 export const metadata = {
   title: "ITRIX Official Site",
@@ -66,7 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${nacelle.variable} font-inter text-base antialiased`}
+        className={`${inter.variable} ${nacelle.variable} ${hkgrotesk.variable} ${cabinet.variable} font-inter text-base antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider>

@@ -27,7 +27,7 @@ export default function PricingHome() {
                 Simple Pricing
               </span>
             </div>
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-10 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
+            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-10 font-cabinet-grotesk text-3xl font-semibold text-transparent md:text-4xl">
               Pick the right plan for your business
             </h2>
           </div>
@@ -44,7 +44,7 @@ export default function PricingHome() {
                   height={40}
                   alt="Large testimonial"
                 />
-                <p className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-3 font-nacelle text-xl font-semibold text-gray-200 text-transparent">
+                <p className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-3 font-cabinet-grotesk text-xl font-semibold text-gray-200 text-transparent">
                   “ITRIX lives up to its name. It's incredibly easy to use
                   yet powerful enough to handle all my content needs
                   effortlessly. It's become an essential part of our work

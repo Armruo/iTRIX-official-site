@@ -45,7 +45,9 @@ module.exports = {
       },
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],
-        nacelle: ["var(--font-nacelle)", "sans-serif"],
+        nacelle: ["var(--font-cabinet-grotesk)", "sans-serif"],
+        'hkgrotesk': ['var(--font-hkgrotesk)', 'sans-serif'],
+        'cabinet-grotesk': ['var(--font-cabinet-grotesk)', 'sans-serif'],
       },
       fontSize: {
         xs: ["0.8125rem", { lineHeight: "1.5384" }],

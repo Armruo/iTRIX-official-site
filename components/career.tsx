@@ -45,7 +45,7 @@ export default function Career() {
         <div className="pb-12 md:pb-20">
           <div className="mx-auto max-w-3xl">
             {/* Section header */}
-            <h3 className="mb-8 font-nacelle text-xl font-semibold md:text-2xl">
+            <h3 className="mb-8 font-cabinet-grotesk text-xl font-semibold md:text-2xl">
               Open positions
             </h3>
             {/* Job list */}
@@ -59,7 +59,7 @@ export default function Career() {
                     <div>
                       <div className="mb-2">
                         <a
-                          className="flex items-center justify-between font-nacelle text-lg font-semibold text-gray-200 transition before:absolute before:inset-0 hover:text-indigo-500"
+                          className="flex items-center justify-between font-cabinet-grotesk text-lg font-semibold text-gray-200 transition before:absolute before:inset-0 hover:text-indigo-500"
                           href="#0"
                         >
                           {position.title}

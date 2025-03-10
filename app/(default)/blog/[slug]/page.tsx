@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { getBlogPosts } from "@/components/mdx/utils";
 import { notFound } from "next/navigation";
 import PageIllustration from "@/components/page-illustration";
@@ -34,10 +34,12 @@ export async function generateMetadata({
   };
 }
 
+type PageParams = { slug: string };
+
 export default async function SinglePost({
   params,
 }: {
-  params: { slug: string };
+  params: PageParams;
 }) {
   const post = getBlogPosts().find((post) => post.slug === params.slug);
 
@@ -54,7 +56,7 @@ export default async function SinglePost({
               <article>
                 {/* Post header */}
                 <header className="mb-8">
-                  <h1 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
+                  <h1 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-cabinet-grotesk text-3xl font-semibold text-transparent md:text-4xl">
                     {post.metadata.title}
                   </h1>
                   <div className="mx-auto mb-5 max-w-3xl">
@@ -116,7 +118,7 @@ export default async function SinglePost({
                 )}
 
                 {/* Article content */}
-                <div className="prose max-w-none text-indigo-200/65 prose-headings:scroll-mt-24 prose-headings:font-nacelle prose-headings:font-semibold prose-headings:text-gray-200 prose-h2:mb-4 prose-h2:text-2xl prose-a:font-medium prose-a:text-indigo-500 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l prose-blockquote:border-indigo-500 prose-blockquote:pl-4 prose-blockquote:font-normal prose-blockquote:italic prose-blockquote:text-indigo-200/65 prose-figcaption:mt-3 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-gray-600 prose-strong:font-medium prose-strong:text-gray-200 prose-code:rounded prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-gray-900 prose-code:before:content-[''] prose-code:after:content-[''] prose-pre:border prose-pre:border-gray-700 prose-pre:bg-gray-900 prose-img:rounded-2xl md:prose-h2:text-3xl before:[&_blockquote_p:first-of-type]:content-none after:[&_blockquote_p:last-of-type]:content-none">
+                <div className="prose max-w-none text-indigo-200/65 prose-headings:scroll-mt-24 prose-headings:font-cabinet-grotesk prose-headings:font-semibold prose-headings:text-gray-200 prose-h2:mb-4 prose-h2:text-2xl prose-a:font-medium prose-a:text-indigo-500 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l prose-blockquote:border-indigo-500 prose-blockquote:pl-4 prose-blockquote:font-normal prose-blockquote:italic prose-blockquote:text-indigo-200/65 prose-figcaption:mt-3 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-gray-600 prose-strong:font-medium prose-strong:text-gray-200 prose-code:rounded prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-gray-900 prose-code:before:content-[''] prose-code:after:content-[''] prose-pre:border prose-pre:border-gray-700 prose-pre:bg-gray-900 prose-img:rounded-2xl md:prose-h2:text-3xl before:[&_blockquote_p:first-of-type]:content-none after:[&_blockquote_p:last-of-type]:content-none">
                   <CustomMDX source={post.content} />
                 </div>
               </article>

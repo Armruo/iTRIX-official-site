@@ -41,7 +41,7 @@ export default function Timeline() {
         <div className="pb-12 md:pb-20">
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
-            <h2 className={`animate-[gradient_6s_linear_infinite] ${gradientBg} bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl`}>
+            <h2 className={`animate-[gradient_6s_linear_infinite] ${gradientBg} bg-[length:200%_auto] bg-clip-text pb-4 font-cabinet-grotesk text-3xl font-semibold text-transparent md:text-4xl`}>
               Bringing the world's ideas to life
             </h2>
             <p className={`text-lg ${textSecondary}/65`}>
@@ -77,7 +77,7 @@ export default function Timeline() {
                     className="absolute left-0 ml-20 box-content h-2 w-2 -translate-x-1/2 transform rounded-full border-4 border-gray-950 bg-indigo-500"
                     aria-hidden="true"
                   />
-                  <h4 className="font-nacelle text-xl font-semibold text-gray-200">
+                  <h4 className="font-cabinet-grotesk text-xl font-semibold text-gray-200">
                     ITRIX was founded in Milan, Italy
                   </h4>
                 </div>
@@ -111,7 +111,7 @@ export default function Timeline() {
                     className="absolute left-0 ml-20 box-content h-2 w-2 -translate-x-1/2 transform rounded-full border-4 border-gray-950 bg-indigo-500"
                     aria-hidden="true"
                   />
-                  <h4 className="font-nacelle text-xl font-semibold text-gray-200">
+                  <h4 className="font-cabinet-grotesk text-xl font-semibold text-gray-200">
                     Launched the first ITRIX Advanced plan
                   </h4>
                 </div>
@@ -145,7 +145,7 @@ export default function Timeline() {
                     className="absolute left-0 ml-20 box-content h-2 w-2 -translate-x-1/2 transform rounded-full border-4 border-gray-950 bg-indigo-500"
                     aria-hidden="true"
                   />
-                  <h4 className="font-nacelle text-xl font-semibold text-gray-200">
+                  <h4 className="font-cabinet-grotesk text-xl font-semibold text-gray-200">
                     Transitioned to a SaaS business model
                   </h4>
                 </div>
@@ -175,7 +175,7 @@ export default function Timeline() {
                     className="absolute left-0 ml-20 box-content h-2 w-2 -translate-x-1/2 transform rounded-full border-4 border-gray-950 bg-indigo-500"
                     aria-hidden="true"
                   />
-                  <h4 className="font-nacelle text-xl font-semibold text-gray-200">
+                  <h4 className="font-cabinet-grotesk text-xl font-semibold text-gray-200">
                     1 million happy customers
                   </h4>
                 </div>
