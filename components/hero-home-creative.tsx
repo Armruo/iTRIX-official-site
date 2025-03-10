@@ -26,6 +26,12 @@ export default function HeroHome() {
     // 如果 ThemeProvider 不可用，使用本地状态
     theme = localTheme;
   }
+
+  // spline 设置
+  const [isLoading, setIsLoading] = useState(true);
+  const handleIframeLoad = () => {
+    setIsLoading(false);
+  };
   
   // 初始化本地主题
   useEffect(() => {
@@ -44,7 +50,14 @@ export default function HeroHome() {
   return (
     <section className="relative">
       {/* Bg */}
-      <div className="absolute inset-0 rounded-bl-[100px] bg-gray-50 pointer-events-none -z-10" aria-hidden="true" />
+      <div 
+        className={`
+          absolute inset-0 rounded-bl-[100px] pointer-events-none -z-10
+          ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}
+          transition-colors duration-300
+        `} 
+        aria-hidden="true" 
+      />
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
           {/* Hero content */}
@@ -155,26 +168,32 @@ export default function HeroHome() {
               </div>
             </div>
             {/* Image */}
-            <div
+            {/* <div
               className="max-w-sm mx-auto md:max-w-none md:absolute md:left-[40rem] md:ml-16 lg:ml-32 xl:ml-52 mt-12 md:-mt-12"
               data-aos="fade-left"
               data-aos-duration="1100"
             >
-              {/* <Image src={HeroImage} className="md:max-w-none" width="584" height="659" priority alt="Hero Illustration" /> */}
+              <Image src={HeroImage} className="md:max-w-none" width="584" height="659" priority alt="Hero Illustration" />
               <Image src={SpaceImage} className="md:max-w-none" width="800" height="900" priority alt="Hero Illustration" />
-              {/* <Image
-                className="max-w-none"
-                src={LogInGirl}
-                width={750}
-                height={800}
-                alt="Blurred shape"
-              /> */}
-            </div>
-            {/* <main>
-              <Spline
-                scene="https://prod.spline.design/DT75wlt6Bgz8yJnV/scene.splinecode" 
+            </div> */}
+            <div className="relative w-full h-[600px]">
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                  <div className="text-xl text-gray-600">Loading...</div>
+                </div>
+              )}
+              <iframe 
+                // src='https://my.spline.design/clonercubesimplecopy-3a8a1d0a76115a9c518ba5d5bd0d9f90/'
+                src='https://my.spline.design/brain-74544328dc9622e185c2931f91fbf2d8/'
+                // src='https://my.spline.design/space-fbf40702879dff5c0e58428fc629d9be/'
+                frameBorder='0'
+                width='100%'
+                height='100%'
+                onLoad={handleIframeLoad}
+                className="absolute inset-0"
               />
-            </main> */}
+            </div>
+
           </div>
         </div>
       </div>
